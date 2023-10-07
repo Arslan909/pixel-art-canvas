@@ -11,7 +11,7 @@ export default function App() {
     updatedPixels[index] = !updatedPixels[index];
     setPixels(updatedPixels);
   };
-  console.log(pixels)
+
 
   return (
     <div className="grid-container">
