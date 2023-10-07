@@ -9,9 +9,11 @@ export default function App() {
   const dragStartIndex = React.useRef(null);
 
   const handlePixelClick = (index) => {
-    const updatedPixels = [...pixels];
-    updatedPixels[index] = !updatedPixels[index];
-    setPixels(updatedPixels);
+    if (!isDragging) {
+      const updatedPixels = [...pixels];
+      updatedPixels[index] = !updatedPixels[index];
+      setPixels(updatedPixels);
+    }
   };
 
   const handleMouseDown = (index) => {
@@ -33,7 +35,7 @@ export default function App() {
   };
 
   return (
-    <div className="grid-container" onMouseUp={handleMouseUp}>
+    <div className="grid-container">
       {pixels.map((pixelState, index) => (
         <Pixel
           key={index}
@@ -41,6 +43,7 @@ export default function App() {
           onClick={() => handlePixelClick(index)}
           onMouseDown={() => handleMouseDown(index)}
           onMouseEnter={() => handleMouseEnter(index)}
+          onMouseUp={handleMouseUp}
         />
       ))}
     </div>

@@ -6,8 +6,9 @@ export default function Pixel(props) {
     <div
       className={`pixel ${props.pixelState ? "black" : ""}`}
       onClick={props.onClick}
-      onMouseDown={props.onMouseDown} // Added onMouseDown event
-      onMouseEnter={props.onMouseEnter} // Added onMouseEnter event
+      onMouseDown={props.onMouseDown}
+      onMouseEnter={props.onMouseEnter}
+      onMouseUp={props.onMouseUp}
     ></div>
   );
 }
@@ -16,5 +17,6 @@ Pixel.propTypes = {
   pixelState: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
   onMouseDown: PropTypes.func.isRequired, 
-  onMouseEnter: PropTypes.func.isRequired
+  onMouseEnter: PropTypes.func.isRequired,
+  onMouseUp: PropTypes.func.isRequired
 }
