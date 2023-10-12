@@ -1,45 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Pixel from "./components/Pixel";
 
 export default function App() {
   const number = 20;
-  const [pixels, setPixels] = React.useState(Array(number * number).fill(false));
-  const [isDragging, setIsDragging] = React.useState(false);
-  const dragStartIndex = React.useRef(null);
+  const [pixels, setPixels] = useState(Array(number * number).fill(false));
+  const [isDragging, setIsDragging] = useState(false);
 
   const handlePixelClick = (index) => {
-    if (!isDragging) {
       const updatedPixels = [...pixels];
       updatedPixels[index] = !updatedPixels[index];
       setPixels(updatedPixels);
-    }
   };
 
-  const handleMouseDown = (index) => {
+  const handleMouseDown = (index,event) => {
+    event.preventDefault();
     setIsDragging(true);
-    dragStartIndex.current = index;
-    // console.log(isDragging)
-
-  };
-
-  React.useEffect(() => {
-    console.log(isDragging);
-  }, [isDragging]);
-
-  const handleMouseEnter = (index) => {
-    if (isDragging) {
-      setPixels(prevPixels => {
-        const updatedPixels = [...prevPixels];
-        updatedPixels[index] = !updatedPixels[index];
-        return updatedPixels;
-      });
-    }
+    handleMouseEnter(index)
   };
 
   const handleMouseUp = () => {
     setIsDragging(false);
-    dragStartIndex.current = null;
+  };
+
+  React.useEffect(() => {
+    document.addEventListener("mouseup", handleMouseUp);
+
+    return () => {
+      document.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, []);
+
+  const handleMouseEnter = (index) => {
+    if (isDragging) {
+      const updatedPixels = [...pixels];
+      updatedPixels[index] = !updatedPixels[index];
+      setPixels(updatedPixels);
+    }
   };
 
   return (
@@ -49,9 +46,8 @@ export default function App() {
           key={index}
           pixelState={pixelState}
           onClick={() => handlePixelClick(index)}
-          onMouseDown={() => handleMouseDown(index)}
+          onMouseDown={(event) => handleMouseDown(index,event)}
           onMouseEnter={() => handleMouseEnter(index)}
-          onMouseUp={handleMouseUp}
         />
       ))}
     </div>

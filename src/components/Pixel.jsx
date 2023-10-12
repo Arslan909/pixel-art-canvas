@@ -8,7 +8,7 @@ export default function Pixel(props) {
       onClick={props.onClick}
       onMouseDown={props.onMouseDown}
       onMouseEnter={props.onMouseEnter}
-      onMouseUp={props.onMouseUp}
+      // onMouseUp={props.onMouseUp}
     ></div>
   );
 }
@@ -18,5 +18,5 @@ Pixel.propTypes = {
   onClick: PropTypes.func.isRequired,
   onMouseDown: PropTypes.func.isRequired, 
   onMouseEnter: PropTypes.func.isRequired,
-  onMouseUp: PropTypes.func.isRequired
+  // onMouseUp: PropTypes.func.isRequired
 }
