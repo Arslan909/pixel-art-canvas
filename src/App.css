@@ -27,6 +27,25 @@
   background-color: black;
 }
 
+.pixel.invert {
+  background-color: white;
+}
+
+.controls{
+  display: flex;
+  width: 150px;
+  height: 30px;
+  color: white;
+  font-weight: bold;
+  align-items: center;
+  justify-content: space-between;
+  /* background-color: blue; */
+}
+.checkBox{
+  transform: scale(1.4);
+  margin-left: 10px;
+}
+
 /* Define styles for hover effect */
 .pixel:hover {
   background-color: rgb(120, 120, 120);

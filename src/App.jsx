@@ -6,6 +6,8 @@ export default function App() {
   const number = 20;
   const [pixels, setPixels] = useState(Array(number * number).fill(false));
   const [isDragging, setIsDragging] = useState(false);
+  const [isInverted, setIsInverted] = useState(false); // State for color inversion
+
 
   const handlePixelClick = (index) => {
       const updatedPixels = [...pixels];
@@ -34,22 +36,39 @@ export default function App() {
   const handleMouseEnter = (index) => {
     if (isDragging) {
       const updatedPixels = [...pixels];
-      updatedPixels[index] = !updatedPixels[index];
+      if (isInverted) {
+        updatedPixels[index] = !updatedPixels[index];
+      } else {
+        updatedPixels[index] = !updatedPixels[index];
+      }
       setPixels(updatedPixels);
     }
   };
+  
+  const handleInvertChange = () => {
+    setIsInverted(!isInverted);
+  };
 
   return (
-    <div className="grid-container">
-      {pixels.map((pixelState, index) => (
-        <Pixel
-          key={index}
-          pixelState={pixelState}
-          onClick={() => handlePixelClick(index)}
-          onMouseDown={(event) => handleMouseDown(index,event)}
-          onMouseEnter={() => handleMouseEnter(index)}
-        />
-      ))}
+    <div className="container">
+      <div className="controls">
+        <label>
+          Invert Colors:   
+          <input type="checkbox" checked={isInverted} onChange={handleInvertChange}  className="checkBox"/>
+        </label>
+      </div>
+      <div className="grid-container">
+        {pixels.map((pixelState, index) => (
+          <Pixel
+            key={index}
+            pixelState={pixelState}
+            onClick={() => handlePixelClick(index)}
+            onMouseDown={(event) => handleMouseDown(index, event)}
+            onMouseEnter={() => handleMouseEnter(index)}
+            isInverted={isInverted}
+          />
+        ))}
+      </div>
     </div>
   );
 }
