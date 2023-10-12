@@ -19,13 +19,21 @@ export default function App() {
   const handleMouseDown = (index) => {
     setIsDragging(true);
     dragStartIndex.current = index;
+    // console.log(isDragging)
+
   };
+
+  React.useEffect(() => {
+    console.log(isDragging);
+  }, [isDragging]);
 
   const handleMouseEnter = (index) => {
     if (isDragging) {
-      const updatedPixels = [...pixels];
-      updatedPixels[index] = !updatedPixels[index];
-      setPixels(updatedPixels);
+      setPixels(prevPixels => {
+        const updatedPixels = [...prevPixels];
+        updatedPixels[index] = !updatedPixels[index];
+        return updatedPixels;
+      });
     }
   };
 

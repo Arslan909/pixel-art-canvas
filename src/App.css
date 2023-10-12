@@ -21,6 +21,7 @@
   height: 100%;
   transition: background-color 0.1s;
   cursor: pointer;
+  border: 1px solid brown;
 }
 
 .pixel.black {
@@ -29,7 +30,7 @@
 
 /* Define styles for hover effect */
 .pixel:hover {
-  background-color: black;
+  background-color: rgb(70, 68, 68);
 }
 
 body{
