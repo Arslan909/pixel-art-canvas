@@ -33,7 +33,6 @@
 
 .controls{
   display: flex;
-  width: 150px;
   height: 30px;
   color: white;
   font-weight: bold;
@@ -41,7 +40,11 @@
   justify-content: space-between;
   /* background-color: blue; */
 }
-.checkBox{
+.invert-checkbox{
+  transform: scale(1.4);
+  margin-left: 10px;
+}
+.lock-checkbox{
   transform: scale(1.4);
   margin-left: 10px;
 }
